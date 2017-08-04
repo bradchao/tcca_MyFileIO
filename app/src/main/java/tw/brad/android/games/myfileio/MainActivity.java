@@ -32,6 +32,14 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Save OK", Toast.LENGTH_SHORT).show();
     }
     public void test2(View view){
+        boolean isSound = sp.getBoolean("sound", false);
+        String username = sp.getString("username","guest");
+        int stage = sp.getInt("stage", 0);
+        int temp = sp.getInt("temp", 100);
+        tv.setText("User Name:" + username + "\n" +
+            "Stage: " + stage + "\n" +
+            "Sound: " + (isSound?"On":"Off") + "\n" +
+            "Temp: " + temp);
 
     }
     public void test3(View view){
