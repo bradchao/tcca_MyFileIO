@@ -3,9 +3,14 @@ package tw.brad.android.games.myfileio;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 public class MainActivity extends AppCompatActivity {
     private TextView tv;
@@ -43,9 +48,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void test3(View view){
-
+        try(FileOutputStream fout = openFileOutput("brad.txt", MODE_PRIVATE)) {
+            fout.write("電腦公會\n".getBytes());
+            fout.write("Brad2\n".getBytes());
+            fout.write("Brad3\n".getBytes());
+            fout.write("Brad4\n".getBytes());
+            Toast.makeText(this, "Save OK", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Log.i("brad", e.toString());
+        }
     }
     public void test4(View view){
+        try {
+            FileInputStream fin = openFileInput("brad.txt");
+            byte[] buf = new byte[4096];
+            int len = fin.read(buf);
+            String data = new String(buf,0,len);
+            fin.close();
+            Toast.makeText(this, data, Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
     public void test5(View view){
