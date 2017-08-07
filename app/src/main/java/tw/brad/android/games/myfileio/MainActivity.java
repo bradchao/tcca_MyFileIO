@@ -14,6 +14,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 
 public class MainActivity extends AppCompatActivity {
@@ -103,12 +105,34 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void test7(View view) {
+        Student s1 = new Student(90,80,64);
+        Log.i("brad", s1.sum() + ":"  +s1.avg());
+
+        FileOutputStream fout = null;
+        try {
+            fout = openFileOutput("s1.object", MODE_PRIVATE);
+            ObjectOutputStream oout = new ObjectOutputStream(fout);
+            oout.writeObject(s1);
+            fout.flush();
+            fout.close();
+            Toast.makeText(this,"Save OK", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Log.i("brad", e.toString());
+        }
+
 
 
     }
     public void test8(View view) {
-
-
+        try {
+            ObjectInputStream oin =
+                    new ObjectInputStream(openFileInput("s1.object"));
+            Student s2 = (Student) oin.readObject();
+            oin.close();
+            Log.i("brad", s2.sum() + ":"  +s2.avg());
+        }catch (Exception e){
+            Log.i("brad", e.toString());
+        }
     }
 
 

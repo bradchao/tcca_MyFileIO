@@ -1,6 +1,8 @@
 package tw.brad.android.games.myfileio;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable {
     int ch, math, eng;
     public Student(int ch, int math, int eng){
         this.ch = ch;
