@@ -8,9 +8,13 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 public class MainActivity extends AppCompatActivity {
     private TextView tv;
@@ -72,7 +76,31 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void test5(View view){
-
+        try {
+            FileOutputStream fout = openFileOutput("brad2.txt", MODE_APPEND);
+            OutputStreamWriter oout = new OutputStreamWriter(fout);
+            oout.write("Hello,World\nLine1\nLine2\n");
+            oout.flush();
+            fout.close();
+            Toast.makeText(this, "Save OK", Toast.LENGTH_SHORT).show();
+        }catch (Exception e){
+            Log.i("brad", e.toString());
+        }
+    }
+    public void test6(View view){
+        try {
+            FileInputStream fin = openFileInput("brad2.txt");
+            InputStreamReader inr = new InputStreamReader(fin);
+            BufferedReader br = new BufferedReader(inr);
+            String line; StringBuffer sb = new StringBuffer();
+            while ( (line = br.readLine()) != null){
+                sb.append(line + "\n");
+            }
+            fin.close();
+            Toast.makeText(this, sb.toString(), Toast.LENGTH_SHORT).show();
+        }catch (Exception e){
+            Log.i("brad", e.toString());
+        }
     }
 
 }
