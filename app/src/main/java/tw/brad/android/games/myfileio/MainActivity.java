@@ -102,5 +102,14 @@ public class MainActivity extends AppCompatActivity {
             Log.i("brad", e.toString());
         }
     }
+    public void test7(View view) {
+
+
+    }
+    public void test8(View view) {
+
+
+    }
+
 
 }
